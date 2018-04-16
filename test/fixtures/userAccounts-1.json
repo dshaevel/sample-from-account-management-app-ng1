@@ -1,0 +1,13 @@
+{
+	"userId": "0822c6ff-20fd-473f-b468-74da8a78fb56",
+	"accountId": "9ff08c32-c0a4-416a-abd2-a3255b74d63a",
+	"createdBy": "0822c6ff-20fd-473f-b468-74da8a78fb56",
+	"created": "09f4e70-a9c8-11e5-a67b-c5787a035631",
+	"modifiedBy": null,
+	"modified": null,
+	"roles": [
+		"admin"
+	],
+	"status": "active",
+	"default": true
+}

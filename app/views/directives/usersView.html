@@ -1,0 +1,76 @@
+<div class="container">
+	<div ng-show="!!inviteUserStatus && !!inviteUserStatus.status && inviteUserStatus.status === 'ERROR'">
+		<div class="d-notification d-notification_error __icon-left-exclamation_triangle users-error">
+			{{inviteUserStatus.message}}
+			<a class="d-notification__close __icon-left-cross" title="Close error message" ng-click="inviteUserStatus.status = 'HIDDEN'"></a>
+		</div>
+		<p></p>
+	</div>
+
+	<div ng-show="!!editRoleStatus && editRoleStatus === 'ERROR'">
+		<div class="d-notification d-notification_error __icon-left-exclamation_triangle users-error">
+			An error occurred editing the user role.
+			<a class="d-notification__close __icon-left-cross" title="Close error message" ng-click="editRoleStatus = 'HIDDEN'"></a>
+		</div>
+		<p></p>
+	</div>
+
+	<div ng-show="!!editStatusStatus && editStatusStatus === 'ERROR'">
+		<div class="d-notification d-notification_error __icon-left-exclamation_triangle users-error">
+			An error occurred editing the user status.
+			<a class="d-notification__close __icon-left-cross" title="Close error message" ng-click="editStatusStatus = 'HIDDEN'"></a>
+		</div>
+		<p></p>
+	</div>
+
+	<div ng-show="(!!getCurrentAccountStatus && getCurrentAccountStatus === 'ERROR') || (!!getAccountUsersStatus && getAccountUsersStatus === 'ERROR')">
+		<div class="d-notification d-notification_error __icon-left-exclamation_triangle users-error">
+			An error occurred retrieving the account users.
+			<a class="d-notification__close __icon-left-cross" title="Close error message" ng-click="getCurrentAccountStatus = getAccountUsersStatus = 'HIDDEN'"></a>
+		</div>
+		<p></p>
+	</div>
+
+	<div ng-show="!!getCurrentAccountStatus_Product && getCurrentAccountStatus_Product === 'ERROR'">
+		<div class="d-notification d-notification_error __icon-left-exclamation_triangle users-error">
+			An error occurred retrieving the product users.
+			<a class="d-notification__close __icon-left-cross" title="Close error message" ng-click="getCurrentAccountStatus_Product = 'HIDDEN'"></a>
+		</div>
+		<p></p>
+	</div>
+
+	<div ng-show="!!showConfirmDisableAccountUser" class='d-modal' tabindex="-1" ng-style="{'z-index': 1050, display: 'block'}">
+		<div class='d-modal__dialog'>
+			<div class='d-modal__header'>
+				<h5 class='d-modal__title'>Disable Account User</h5>
+			</div>
+			<div class='d-modal__content'>
+				<p class='d-modal__content-item'>If you disable the account user <b>{{accountUserToDisable.email}}</b>, the user will not be able to log into the TrueSight Account Manager or any Account Products.</p>
+				<p class='d-modal__content-item'><b>NOTE: </b>Disabled account users are not listed on the Product Users page.</p>
+			</div>
+			<div class='d-modal__footer'>
+				<button class='d-button d-button_primary d-button_small' ng-click="enableAccountUser(false, accountUserToDisable)">OK</button>
+				<button class='d-button d-button_secondary d-button_small' ng-click="closeConfirmDisableAccountUser()">Cancel</button>
+			</div>
+		</div>
+	</div>
+	<div ng-show="!!showConfirmDisableAccountUser" class="modal-backdrop in" uib-modal-backdrop="modal-backdrop" style="z-index: 1040;"></div>
+
+	<div class="row">
+		<div class="table-article">
+			<div class="table-article-header">
+				<div class="t-cell-first">Last Name</div>
+				<div class="t-cell">First Name</div>
+				<div class="t-cell">Email</div>
+				<div class="t-cell">Last Access</div>
+				<div class="t-cell table-centered">Roles</div>
+				<div ng-class="{'t-cell': isAdmin(currentUserAccount), 't-cell-last': !isAdmin(currentUserAccount)}" class="table-centered">Status</div>
+				<div ng-show="isAdmin(currentUserAccount)" class="t-cell-last table-centered">Actions</div>
+			</div>
+			<div ng-show="isAdmin(currentUserAccount)" invite-component></div>
+			<div ng-show="isAdmin(currentUserAccount)" invites-list></div>
+			<div users-list></div>
+		</div>
+	</div>
+	<p></p>
+</div>

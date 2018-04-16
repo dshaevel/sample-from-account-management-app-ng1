@@ -1,0 +1,17 @@
+<div class="table-article-rows" ng-class-even="'odd'" ng-repeat="user in users">
+	<div class="t-cell-first">{{user.lastName}}</div>
+	<div class="t-cell">{{user.firstName}}</div>
+	<div class="t-cell">{{user.email}}</div>
+	<div class="t-cell">{{toDate(user.lastLogin) | date:'medium'}}</div>
+	<div ng-show="isAdmin(currentUserAccount) && user.userId !== currentUserId" class="t-cell">
+		<select class="d-input-like d-textfield__input form-select table-centered user-role-select-centered" ng-model="user.selectedRoles" ng-change="selectedRolesChanged(user)">
+			<option value="admin" ng-selected="isAdmin(user)">Admin</option>
+			<option value="user" ng-selected="!isAdmin(user)">User</option>
+		</select>
+	</div>
+	<div ng-show="!isAdmin(currentUserAccount) || user.userId === currentUserId" class="t-cell table-centered">{{isAdmin(user) ? 'Admin' : 'User'}}</div>
+	<div ng-class="{'t-cell': isAdmin(currentUserAccount), 't-cell-last': !isAdmin(currentUserAccount)}" class="table-centered">{{user.status.charAt(0).toUpperCase() + user.status.slice(1)}}</div>
+	<div ng-show="isAdmin(currentUserAccount) && !isDisabledActionHidden && user.status === 'active' && user.userId !== currentUserId" class="t-cell-last table-centered"><a class="__icon-right-minus_circle" title="Disable {{user.email}}" ng-click="openConfirmDisableAccountUser(user)">Disable </a></div>
+	<div ng-show="isAdmin(currentUserAccount) && !isDisabledActionHidden && user.status === 'disabled'" class="t-cell-last table-centered"><a class="__icon-right-plus_circle" title="Enable {{user.email}}" ng-click="enableAccountUser(true, user)">Enable </a></div>
+	<div ng-show="!isAdmin(currentUserAccount) || isDisabledActionHidden || user.userId === currentUserId" class="t-cell-last table-centered"></div>
+</div>

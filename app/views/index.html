@@ -1,0 +1,58 @@
+<div class="page-header">
+	<h1>
+		<span class="d-icon-monitor_user"></span>
+		<ol class="breadcrumb">
+			<li><a>Accounts</a></li>
+			<li><a>{{currentUserAccount.name}}-{{currentUserAccount.accountId.substring(0, 8)}}</a></li>
+		</ol>
+	</h1>
+</div>
+<div class="container" style="padding-top: 10px;">
+	<div class="row">
+		<div class="d-textfield d-textfield_inline col-sm-3 col-xs-12">
+			<label>
+				<div style="font-weight: bold;">Account</div>
+				<select class="d-input-like d-textfield__input detail-select ng-pristine ng-valid ng-touched" ng-model="account" ng-change="updateAccount(account)" ng-options="option.name + '-' + option.accountId.substring(0, 8) for option in accounts track by option.accountId"></select>
+			</label>
+		</div>
+		<div class="d-textfield d-textfield_inline col-sm-1 col-xs-12"></div>
+		<div class="d-textfield d-textfield_inline col-sm-3 col-xs-12">
+			<label>
+				<div style="font-weight: bold;">Company</div>
+				<input class="d-textfield__input" type="text" placeholder="{{currentUserAccount.name}}" disabled>
+			</label>
+		</div>
+		<div class="d-textfield d-textfield_inline col-sm-1 col-xs-12"></div>
+		<div class="d-textfield d-textfield_inline col-sm-3 col-xs-12">
+			<label>
+				<div style="font-weight: bold;">Country</div>
+				<input class="d-textfield__input" type="text" placeholder="{{currentUserAccount.country}}" disabled>
+			</label>
+		</div>
+		<div class="d-textfield d-textfield_inline col-sm-1 col-xs-12"></div>
+	</div>
+	<div class="row">
+		<ul class="nav nav-tabs">
+			<li role="presentation" ng-class="{active: tab === 'users'}">
+				<a data-toggle="tab" ng-click="tab = 'users'" aria-controls="users_tab">Users</a>
+			</li>
+			<li role="presentation" ng-class="{active: tab === 'api_tokens'}">
+				<a data-toggle="tab" ng-click="tab = 'api_tokens'" aria-controls="api_tokens_tab">API Tokens</a>
+			</li>
+			<li ng-show="impersonationAuditEnabled" role="presentation" ng-class="{active: tab === 'access_audit'}">
+				<a data-toggle="tab" ng-click="tab = 'access_audit'" aria-controls="access_audit_tab">Access Audit</a>
+			</li>
+		</ul>
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane" ng-class="{active: tab === 'users'}" id="users_tab">
+				<div users-view title="Users" ng-controller="UsersCtrl"></div>
+			</div>
+			<div role="tabpanel" class="tab-pane" ng-class="{active: tab === 'api_tokens'}" id="api_tokens_tab">
+				<div tokens-view title="API Tokens" ng-controller="AccountProductSecurityCtrl"></div>
+			</div>
+			<div role="tabpanel" class="tab-pane" ng-class="{active: tab === 'access_audit'}" id="access_audit_tab">
+				<div access-audit-view title="Access Audit"></div>
+			</div>
+		</div>
+	</div>
+</div>
